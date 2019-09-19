@@ -41,6 +41,14 @@ $is-ie: false !default;
     min-height: 0px;
   }
 
+  .descriptive__text a:focus {
+    outline: 3px solid transparent;
+    color: $govuk-text-colour;
+    background-color: govuk-colour("yellow");
+    box-shadow: 0 -2px govuk-colour("yellow"), 0 4px govuk-colour("black");
+    text-decoration: none;
+  }
+
   .previous-answers-top {
     margin-bottom: 1.5em;
   }
