@@ -10,34 +10,34 @@ module SmartAnswer::Calculators
 
       context "with a start_date" do
         should "return the fraction of a year" do
-          calc = HolidayEntitlement.new(start_date: Date.parse("2011-02-21"))
+          _calc = HolidayEntitlement.new(start_date: Date.parse("2011-02-21"))
           assert_equal "0.8603", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year" do
-          calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"))
+          _calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"))
           assert_equal "0.8607", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year not covering Feb 29th" do
-          calc = HolidayEntitlement.new(start_date: Date.parse("2012-03-01"))
+          _calc = HolidayEntitlement.new(start_date: Date.parse("2012-03-01"))
           assert_equal "0.8361", sprintf("%<calc.fraction_of_year>f")
         end
       end
 
       context "with a leaving_date" do
         should "return the fraction of a year" do
-          calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-06-21"))
+          _calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-06-21"))
           assert_equal "0.4712", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year" do
-          calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-06-21"))
+          _calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-06-21"))
           assert_equal "0.4727", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year not covering Feb 29th" do
-          calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"))
+          _calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"))
           assert_equal "0.0574", sprintf("%<calc.fraction_of_year>f")
         end
       end
@@ -46,35 +46,35 @@ module SmartAnswer::Calculators
         context "with a start date" do
           context "start date before leave_year_start" do
             should "return the fraction of a year" do
-              calc = HolidayEntitlement.new(start_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
               assert_equal "0.0301", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
               # 2011-12-31 to 2012-12-30
-              calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-02"), leave_year_start_date: Date.parse("2012-12-31"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-02"), leave_year_start_date: Date.parse("2012-12-31"))
               assert_equal "0.9098", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
-              calc = HolidayEntitlement.new(start_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
               assert_equal "0.0301", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - start date before leave_year_start
 
           context "start date after leave_year_start" do
             should "return the fraction of a year" do
-              calc = HolidayEntitlement.new(start_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
               assert_equal "0.7836", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
-              calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
               assert_equal "0.9454", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
-              calc = HolidayEntitlement.new(start_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
+              _calc = HolidayEntitlement.new(start_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
               assert_equal "0.7814", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - start date after leave_year_start
@@ -83,34 +83,34 @@ module SmartAnswer::Calculators
         context "with a leave date" do
           context "leaving date before leave_year_start" do
             should "return the fraction of a year" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
               assert_equal "0.9726", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
               assert_equal "0.9727", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"), leave_year_start_date: Date.parse("2012-03-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"), leave_year_start_date: Date.parse("2012-03-01"))
               assert_equal "0.8934", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - leaving date before leave_year_start
 
           context "leaving date after leave_year_start" do
             should "return the fraction of a year" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
               assert_equal "0.2192", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
               assert_equal "0.2213", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
-              calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
+              _calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
               assert_equal "0.0574", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - leaving date after leave_year_start
@@ -118,7 +118,7 @@ module SmartAnswer::Calculators
       end # context - with a leave_year_start
 
       should "format the result" do
-        calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"))
+        _calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"))
         assert_equal "0.87", calc.formatted_fraction_of_year
       end
     end # context - calculating fraction of year
@@ -126,7 +126,7 @@ module SmartAnswer::Calculators
     context "calculating full-time or part-time holiday entitlement" do
       context "working for a full year" do
         should "calculate entitlement for 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             days_per_week: 5,
           )
 
@@ -134,7 +134,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for more than 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             days_per_week: 6,
           )
 
@@ -143,7 +143,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for less than 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             days_per_week: 3,
           )
 
@@ -153,7 +153,7 @@ module SmartAnswer::Calculators
 
       context "starting this year" do
         should "calculate entitlement for 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             start_date: Date.parse("2012-03-12"),
             days_per_week: 5,
           )
@@ -161,7 +161,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for more than 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             start_date: Date.parse("2012-03-12"),
             days_per_week: 7,
           )
@@ -170,7 +170,7 @@ module SmartAnswer::Calculators
         end
 
         should "cap entitlement at 28 days if starting on first day" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             start_date: Date.parse("2012-01-01"),
             days_per_week: 7,
           )
@@ -178,7 +178,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for less than 5 days per week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             start_date: Date.parse("2012-03-12"),
             days_per_week: 3,
           )
@@ -188,7 +188,7 @@ module SmartAnswer::Calculators
 
       context "leaving this year" do
         should "calculate entitlement for 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             leaving_date: Date.parse("2012-07-24"),
             days_per_week: 5,
           )
@@ -196,7 +196,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for more than 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             leaving_date: Date.parse("2012-07-24"),
             days_per_week: 6,
           )
@@ -213,7 +213,7 @@ module SmartAnswer::Calculators
         end
 
         should "calculate entitlement for less than 5 days a week" do
-          calc = HolidayEntitlement.new(
+          _calc = HolidayEntitlement.new(
             leaving_date: Date.parse("2012-07-24"),
             days_per_week: 3,
           )
