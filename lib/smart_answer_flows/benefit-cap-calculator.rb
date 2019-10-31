@@ -146,7 +146,7 @@ module SmartAnswer
 
       #Q7 Enter a postcode
       postcode_question :enter_postcode? do
-        calculate :benefit_cap do |response|
+        calculate :benefit_cap do |_response|
           sprintf("%<config.weekly_benefit_cap_amount(family_type, config.region(response))>f")
         end
 
