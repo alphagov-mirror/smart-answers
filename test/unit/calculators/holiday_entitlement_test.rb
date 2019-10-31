@@ -11,34 +11,34 @@ module SmartAnswer::Calculators
       context "with a start_date" do
         should "return the fraction of a year" do
           calc = HolidayEntitlement.new(start_date: Date.parse("2011-02-21"))
-          assert_equal "0.8603", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.8603", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year" do
           calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"))
-          assert_equal "0.8607", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.8607", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year not covering Feb 29th" do
           calc = HolidayEntitlement.new(start_date: Date.parse("2012-03-01"))
-          assert_equal "0.8361", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.8361", sprintf("%<calc.fraction_of_year>f")
         end
       end
 
       context "with a leaving_date" do
         should "return the fraction of a year" do
           calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-06-21"))
-          assert_equal "0.4712", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.4712", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year" do
           calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-06-21"))
-          assert_equal "0.4727", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.4727", sprintf("%<calc.fraction_of_year>f")
         end
 
         should "return the fraction of a year in a leap year not covering Feb 29th" do
           calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"))
-          assert_equal "0.0574", sprintf("%.4f", calc.fraction_of_year)
+          assert_equal "0.0574", sprintf("%<calc.fraction_of_year>f")
         end
       end
 
@@ -47,35 +47,35 @@ module SmartAnswer::Calculators
           context "start date before leave_year_start" do
             should "return the fraction of a year" do
               calc = HolidayEntitlement.new(start_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
-              assert_equal "0.0301", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.0301", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
               # 2011-12-31 to 2012-12-30
               calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-02"), leave_year_start_date: Date.parse("2012-12-31"))
-              assert_equal "0.9098", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.9098", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
               calc = HolidayEntitlement.new(start_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
-              assert_equal "0.0301", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.0301", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - start date before leave_year_start
 
           context "start date after leave_year_start" do
             should "return the fraction of a year" do
               calc = HolidayEntitlement.new(start_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
-              assert_equal "0.7836", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.7836", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
               calc = HolidayEntitlement.new(start_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
-              assert_equal "0.9454", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.9454", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
               calc = HolidayEntitlement.new(start_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
-              assert_equal "0.7814", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.7814", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - start date after leave_year_start
         end # context - with a start date
@@ -84,34 +84,34 @@ module SmartAnswer::Calculators
           context "leaving date before leave_year_start" do
             should "return the fraction of a year" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-01-21"), leave_year_start_date: Date.parse("2011-02-01"))
-              assert_equal "0.9726", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.9726", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2013-01-21"), leave_year_start_date: Date.parse("2013-02-01"))
-              assert_equal "0.9727", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.9727", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-01-21"), leave_year_start_date: Date.parse("2012-03-01"))
-              assert_equal "0.8934", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.8934", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - leaving date before leave_year_start
 
           context "leaving date after leave_year_start" do
             should "return the fraction of a year" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2011-04-21"), leave_year_start_date: Date.parse("2011-02-01"))
-              assert_equal "0.2192", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.2192", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-04-21"), leave_year_start_date: Date.parse("2012-02-01"))
-              assert_equal "0.2213", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.2213", sprintf("%<calc.fraction_of_year>f")
             end
 
             should "return the fraction of a year in a leap year not covering Feb 29th" do
               calc = HolidayEntitlement.new(leaving_date: Date.parse("2012-02-21"), leave_year_start_date: Date.parse("2012-02-01"))
-              assert_equal "0.0574", sprintf("%.4f", calc.fraction_of_year)
+              assert_equal "0.0574", sprintf("%<calc.fraction_of_year>f")
             end
           end # context - leaving date after leave_year_start
         end # context - with a leave date
@@ -147,7 +147,7 @@ module SmartAnswer::Calculators
             days_per_week: 3,
           )
 
-          assert_equal "16.80", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "16.80", sprintf("%<calc.full_time_part_time_days>f")
         end
       end # full year
 
@@ -157,7 +157,7 @@ module SmartAnswer::Calculators
             start_date: Date.parse("2012-03-12"),
             days_per_week: 5,
           )
-          assert_equal "22.57", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "22.57", sprintf("%<calc.full_time_part_time_days>f")
         end
 
         should "calculate entitlement for more than 5 days a week" do
@@ -166,7 +166,7 @@ module SmartAnswer::Calculators
             days_per_week: 7,
           )
           # Capped
-          assert_equal "22.57", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "22.57", sprintf("%<calc.full_time_part_time_days>f")
         end
 
         should "cap entitlement at 28 days if starting on first day" do
@@ -182,7 +182,7 @@ module SmartAnswer::Calculators
             start_date: Date.parse("2012-03-12"),
             days_per_week: 3,
           )
-          assert_equal "13.54", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "13.54", sprintf("%<calc.full_time_part_time_days>f")
         end
       end # starting this year
 
@@ -192,7 +192,7 @@ module SmartAnswer::Calculators
             leaving_date: Date.parse("2012-07-24"),
             days_per_week: 5,
           )
-          assert_equal "15.76", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "15.76", sprintf("%<calc.full_time_part_time_days>f")
         end
 
         should "calculate entitlement for more than 5 days a week" do
@@ -201,7 +201,7 @@ module SmartAnswer::Calculators
             days_per_week: 6,
           )
           # Capped
-          assert_equal "15.76", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "15.76", sprintf("%<calc.full_time_part_time_days>f")
         end
 
         should "cap entitlement at 28 days if leaving at end of year" do
@@ -217,7 +217,7 @@ module SmartAnswer::Calculators
             leaving_date: Date.parse("2012-07-24"),
             days_per_week: 3,
           )
-          assert_equal "9.46", sprintf("%.2f", calc.full_time_part_time_days)
+          assert_equal "9.46", sprintf("%<calc.full_time_part_time_days>f")
         end
       end # leaving this year
 
@@ -267,7 +267,7 @@ module SmartAnswer::Calculators
         end
 
         should "return the holiday entitlement in shifts" do
-          assert_equal "19.600", sprintf("%.3f", @calc.shift_entitlement)
+          assert_equal "19.600", sprintf("%<@calc.shift_entitlement>f")
         end
       end # full year
 
@@ -282,7 +282,7 @@ module SmartAnswer::Calculators
         end
 
         should "return the holiday entitlement in shifts" do
-          assert_equal "9.854", sprintf("%.3f", @calc.shift_entitlement)
+          assert_equal "9.854", sprintf("%<@calc.shift_entitlement>f")
         end
       end
 
@@ -297,7 +297,7 @@ module SmartAnswer::Calculators
         end
 
         should "return the holiday entitlement in shifts" do
-          assert_equal "14.673", sprintf("%.3f", @calc.shift_entitlement)
+          assert_equal "14.673", sprintf("%<@calc.shift_entitlement>f")
         end
       end
     end

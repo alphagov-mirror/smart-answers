@@ -316,13 +316,13 @@ module SmartAnswer
             )
           end
           precalculate :smp_a do
-            sprintf("%.2f", calculator.statutory_maternity_rate_a)
+            sprintf("%<calculator.statutory_maternity_rate_a>f")
           end
           precalculate :smp_b do
-            sprintf("%.2f", calculator.statutory_maternity_rate_b)
+            sprintf("%<calculator.statutory_maternity_rate_b>f")
           end
           precalculate :lower_earning_limit do
-            sprintf("%.2f", calculator.lower_earning_limit)
+            sprintf("%<calculator.lower_earning_limit>f")
           end
 
           precalculate :notice_request_pay do
@@ -344,14 +344,14 @@ module SmartAnswer
 
           precalculate :total_smp do
             unless not_entitled_to_pay_reason.present?
-              sprintf("%.2f", calculator.total_statutory_pay)
+              sprintf("%<calculator.total_statutory_pay>f")
             end
           end
 
           precalculate :pay_dates_and_pay do
             unless not_entitled_to_pay_reason.present?
               lines = calculator.paydates_and_pay.map do |date_and_pay|
-                %(#{date_and_pay[:date].strftime('%e %B %Y')}|£#{sprintf('%.2f', date_and_pay[:pay])})
+                %(#{date_and_pay[:date].strftime('%e %B %Y')}|£#{sprintf('%<date_and_pay[:pay]>f')})
               end
               lines.join("\n")
             end
