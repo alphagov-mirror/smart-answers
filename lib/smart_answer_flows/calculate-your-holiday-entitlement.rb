@@ -89,7 +89,7 @@ module SmartAnswer
         end
       end
 
-      # Q5 - Q13 - Q21 - Q29 - Q37
+      # Q5 - Q13 - Q21 - Q29 - Q30 - Q37
       date_question :what_is_your_leaving_date? do
         from { Date.civil(1.year.ago.year, 1, 1) }
         to { Date.civil(1.year.since(Date.today).year, 12, 31) }
@@ -113,7 +113,7 @@ module SmartAnswer
         end
       end
 
-      # Q6 - Q14 - Q22 - Q38
+      # Q6 - Q14 - Q22 - Q31 - Q38
       date_question :when_does_your_leave_year_start? do
         from { Date.civil(1.year.ago.year, 1, 1) }
         to { Date.civil(1.year.since(Date.today).year, 12, 31) }
@@ -229,7 +229,7 @@ module SmartAnswer
           )
         end
         precalculate :holiday_entitlement_shifts do
-          calculator.rounded_shift_entitlement
+          calculator.shift_entitlement
         end
       end
 
