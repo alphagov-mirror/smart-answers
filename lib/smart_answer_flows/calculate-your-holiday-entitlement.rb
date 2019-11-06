@@ -48,6 +48,8 @@ module SmartAnswer
           when "full-year"
             if calculation_basis == "irregular-hours" || calculation_basis == "annualised-hours"
               outcome :irregular_and_annualised_done
+            else
+              question :how_many_hours_per_week?
             end
           else
             if calculation_basis == "days-worked-per-week"
