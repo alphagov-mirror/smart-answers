@@ -40,9 +40,9 @@ module SmartAnswer
           "away-outside-london" => 2389,
         },
         "2020-2021" => {
-          "at-home" => 1793,
-          "away-in-london" => 3354,
-          "away-outside-london" => 2389,
+          "at-home" => 1845,
+          "away-in-london" => 3451,
+          "away-outside-london" => 2458,
         },        
       }.freeze
       CHILD_CARE_GRANTS = {
@@ -101,7 +101,7 @@ module SmartAnswer
           "away-outside-london" => 7.79,
           "away-in-london" => 7.66,
         },
-        "2019-2020" => {
+        "2020-2021" => {
           "at-home" => 7.66,
           "away-outside-london" => 7.58,
           "away-in-london" => 7.46,
