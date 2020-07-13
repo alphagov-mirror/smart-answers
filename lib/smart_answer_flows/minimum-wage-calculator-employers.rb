@@ -36,10 +36,6 @@ module SmartAnswer
 
       # Q3
       value_question :how_old_are_you?, parse: Integer do
-        precalculate :age_title do
-          "How old are you?"
-        end
-
         validate do |response|
           calculator.valid_age?(response)
         end
