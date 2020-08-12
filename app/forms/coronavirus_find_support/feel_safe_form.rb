@@ -1,24 +1,16 @@
 module CoronavirusFindSupport
-  class FeelSafeForm
-    include ActiveModel::Model
-    include ActiveModel::Validations
-
-    attr_accessor :session, :feel_safe
-    attr_reader :params
-
+  class FeelSafeForm < Form
     def initialize(params, session)
-      @params = params
-      @session = session
+      super(params, session, :session_answers, :feel_safe)
     end
 
     def options
       {
         yes: "Yes",
+        yes_but_i_am_concerned_about_others: "Yes, but I’m worried about the safety of another adult or a child",
         no: "No",
         not_sure: "Not sure",
-      }.each_with_object([]) do |(key, value), array|
-        array << { label: value, value: key.to_s }
-      end
+      }
     end
   end
 end
