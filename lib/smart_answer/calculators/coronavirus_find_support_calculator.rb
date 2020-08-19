@@ -15,6 +15,14 @@ module SmartAnswer::Calculators
                   :have_you_been_made_unemployed,
                   :mental_health_worries
 
+    def valid_nation?
+      nation.present? && nation != "none"
+    end
+
+    def valid_need_help_with?
+      need_help_with.present? && need_help_with != "none"
+    end
+
     def has_results?
       need_help_with.present?
     end

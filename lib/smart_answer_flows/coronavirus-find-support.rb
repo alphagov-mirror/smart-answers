@@ -25,6 +25,10 @@ module SmartAnswer
           calculator.need_help_with = response
         end
 
+        validate do
+          calculator.valid_need_help_with?
+        end
+
         next_node do
           question calculator.next_question(:need_help_with?)
         end
@@ -262,6 +266,10 @@ module SmartAnswer
 
         on_response do |response|
           calculator.nation = response
+        end
+
+        validate do
+          calculator.valid_nation?
         end
 
         next_node do
