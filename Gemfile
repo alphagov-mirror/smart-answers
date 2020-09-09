@@ -43,6 +43,8 @@ end
 group :test do
   gem "ci_reporter"
   gem "govuk_test"
+  gem "jasmine", "~> 3.6.0"
+  gem "jasmine_selenium_runner", "~> 3.0.0", require: false
   gem "minitest"
   gem "minitest-focus"
   gem "mocha", require: false
