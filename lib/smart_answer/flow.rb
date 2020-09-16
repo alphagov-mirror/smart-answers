@@ -155,12 +155,22 @@ module SmartAnswer
       state = start_state
 
       until state.nil?
-        return state if state.error
-        return state if state.current_node.to_s == requested_node && !responses.key?(state.current_node.to_s)
-        return state if node(state.current_node).outcome?
+        node_name = state.current_node.to_s
 
-        response = responses[state.current_node.to_s]
+        return state unless responses.key?(node_name)
+
+        response = responses[node_name]
+
+        if node_name == requested_node
+          old_state = state.dup
+          state = transistion_state(state, response)
+          return state.error ? state : old_state
+        end
+
         state = transistion_state(state, response)
+
+        return state if state.error
+        return state if node(state.current_node).outcome?
       end
     end
 
