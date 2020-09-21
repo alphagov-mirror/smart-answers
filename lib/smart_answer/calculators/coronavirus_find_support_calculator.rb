@@ -14,52 +14,51 @@ module SmartAnswer::Calculators
                   :have_you_been_made_unemployed,
                   :mental_health_worries
 
-    def has_results?
-      return false if need_help_with.blank?
+    RULES = {
+      feeling_unsafe: lambda { |calculator|
+        calculator.needs_help_with?("feeling_unsafe") && calculator.feel_safe != "yes"
+      },
+      paying_bills: lambda { |calculator|
+        calculator.needs_help_with?("paying_bills") && calculator.afford_rent_mortgage_bills != "no"
+      },
+      getting_food: lambda { |calculator|
+        calculator.needs_help_with?("getting_food") &&
+          (calculator.afford_food != "no" && calculator.get_food != "yes")
+      },
+      going_to_work: lambda { |calculator|
+        calculator.needs_help_with?("going_to_work") && calculator.worried_about_work != "no"
+      },
+      being_unemployed: lambda { |calculator|
+        calculator.needs_help_with?("being_unemployed") && (
+          (calculator.self_employed != "yes" && calculator.have_you_been_made_unemployed != "no") || calculator.are_you_off_work_ill == "yes"
+        )
+      },
+      somewhere_to_live: lambda { |calculator|
+        calculator.needs_help_with?("somewhere_to_live") && (
+          calculator.have_somewhere_to_live != "yes" || calculator.have_you_been_evicted != "no"
+        )
+      },
+      mental_health: lambda { |calculator|
+        calculator.needs_help_with?("mental_health") && calculator.mental_health_worries != "no"
+      },
+    }.freeze
 
-      need_help_with != "none"
+    def show?(section)
+      RULES[section].call(self)
+    end
+
+    def has_results?
+      RULES.keys.map { |key| RULES[key].call(self) }.uniq.include? true
     end
 
     def needs_help_with?(given_help_item)
-      return false unless has_results?
+      return false if need_help_with.blank?
 
       need_help_with.split(",").include? given_help_item
     end
 
     def needs_help_in?(given_nation)
       nation == given_nation
-    end
-
-    def user_feels_unsafe?
-      needs_help_with?("feeling_unsafe") && feel_safe != "yes"
-    end
-
-    def user_cannot_pay_their_bills?
-      needs_help_with?("paying_bills") && afford_rent_mortgage_bills != "no"
-    end
-
-    def user_cannot_get_food?
-      needs_help_with?("getting_food") && (afford_food != "no" && get_food != "yes")
-    end
-
-    def user_is_worried_about_going_to_work?
-      needs_help_with?("going_to_work") && worried_about_work != "no"
-    end
-
-    def user_is_unemployed?
-      needs_help_with?("being_unemployed") && (
-        (self_employed != "yes" && have_you_been_made_unemployed != "no") || are_you_off_work_ill == "yes"
-      )
-    end
-
-    def user_needs_somewhere_to_live?
-      needs_help_with?("somewhere_to_live") && (
-        have_somewhere_to_live != "yes" || have_you_been_evicted != "no"
-      )
-    end
-
-    def user_has_mental_health_worries?
-      needs_help_with?("mental_health") && mental_health_worries != "no"
     end
 
     def next_question(current_node)
