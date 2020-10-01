@@ -28,20 +28,6 @@
         } unless outcome.title_as_heading? %>
       <% end %>
 
-      <% if @presenter.hide_previous_answers_on_results_page? %>
-        <p class="govuk-body govuk-!-margin-bottom-6">
-          <%= link_to "Start again",
-            restart_flow_path(@presenter),
-            :class => "govuk-link",
-            :data => {
-              module: "track-click",
-              "track-action": "Start again",
-              "track-category": "StartAgain",
-              "track-label": @presenter.current_node.title
-            } %>
-        </p>
-      <% end %>
-
       <%= outcome.body %>
     </div>
 
@@ -69,9 +55,7 @@
       });
     </script>
 
-    <% unless @presenter.hide_previous_answers_on_results_page? %>
-      <%= render 'smart_answers/previous_answers' %>
-    <% end %>
+    <%= render 'smart_answers/previous_answers', hide_previous_answers: @presenter.hide_previous_answers_on_results_page? %>
   </div>
 
   <% if defined?(@presenter.finished?) and @presenter.finished? %>
