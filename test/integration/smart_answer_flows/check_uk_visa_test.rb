@@ -209,6 +209,16 @@ class CheckUkVisaTest < ActiveSupport::TestCase
       should "ask what are you coming to the UK to do" do
         assert_current_node :purpose_of_visit?
       end
+
+      context "coming to the UK to work for 6 months or less" do
+        setup do
+          add_response "work"
+          add_response "six_months_or_less"
+        end
+        should "take you to work_n outcome" do
+          assert_current_node :outcome_work_n
+        end
+      end
     end
   end
 

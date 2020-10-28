@@ -233,7 +233,8 @@ module SmartAnswer
             elsif calculator.work_visit?
               if calculator.passport_country_in_electronic_visa_waiver_list?
                 outcome :outcome_work_waiver
-              elsif (calculator.passport_country_in_ukot_list? ||
+              elsif (calculator.passport_country_in_eea? ||
+                  calculator.passport_country_in_ukot_list? ||
                   calculator.passport_country_is_taiwan? ||
                   calculator.passport_country_in_non_visa_national_list?) &&
                   !calculator.travel_document?
