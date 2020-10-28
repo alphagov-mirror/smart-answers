@@ -219,6 +219,16 @@ class CheckUkVisaTest < ActiveSupport::TestCase
           assert_current_node :outcome_work_n
         end
       end
+
+      context "coming to the UK to study for 6 months or less" do
+        setup do
+          add_response "study"
+          add_response "six_months_or_less"
+        end
+        should "take you to outcome no visa outcome_no_visa_needed" do
+          assert_current_node :outcome_no_visa_needed
+        end
+      end
     end
   end
 
